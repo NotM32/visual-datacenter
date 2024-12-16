@@ -1,6 +1,6 @@
 <script lang="ts">
   import { T } from '@threlte/core'
-  import { ContactShadows, Float, Grid, OrbitControls, Text } from '@threlte/extras'
+  import { ContactShadows, Float, Grid, OrbitControls, Sky, Text } from '@threlte/extras'
   import { floorLayout, cabs } from '../dcim.ts';
 
   import Rack from './models/server_rack.svelte'
@@ -25,7 +25,7 @@
   fov={55}
 >
   <OrbitControls
-    enableZoom={false}
+    enableZoom={true}
     enableDamping
     target.y={3}
   />
@@ -36,7 +36,8 @@
   position.x={0}
   position.y={8}
 />
-<T.AmbientLight intensity={0.8} />
+
+<T.AmbientLight intensity={1} />
 
 <ContactShadows
   scale={10}
@@ -50,10 +51,10 @@
   position.y={-0.001}
   gridSize={[floorLayout.tilesX, floorLayout.tilesY]}
   cellColor="#ffffff"
-  sectionColor="#ffffff"
   sectionThickness={0}
   fadeDistance={125}
   cellSize={1}
+  cellThickness={2}
 />
 
 <!-- NUMBERING -->
@@ -66,7 +67,7 @@
   <Text
     text={row}
     fontSize={0.5}
-    color="#F8B152"
+    color="red"
     rotation={[0, -Math.PI/2, 0]}
   />
   <T.MeshStandardMaterial />
@@ -82,11 +83,30 @@
   <Text
     text={aisle}
     fontSize={0.5}
-    color="#F8B152"
+    color="red"
   />
   <T.MeshStandardMaterial />
 </T.Mesh>
 {/each}
+
+<!-- WALLS -->
+<T.Mesh
+  position.z={-floorLayout.tilesY/2-0.001}
+  position.y={5}
+  position.x={0}
+>
+  <T.PlaneGeometry args={[floorLayout.tilesX, 10]}/>
+  <T.MeshBasicMaterial />
+</T.Mesh>
+<T.Mesh
+  position.z={0.001}
+  position.y={5}
+  position.x={floorLayout.tilesX/2+0.001}
+  rotation={[0, -Math.PI/2, 0]}
+>
+  <T.PlaneGeometry args={[floorLayout.tilesY, 10]}/>
+  <T.MeshBasicMaterial />
+</T.Mesh>
 
 <!-- CABINETS -->
 {#each cabs as cab}
@@ -95,6 +115,7 @@
   rotation={[0, -Math.PI/2, 0]}
   scale={2}
 />
+<!-- Temp -->
 <Float
   floatIntensity={2}
   scale={1.5}
@@ -102,7 +123,7 @@
   <Text
     text="{Math.floor(75+(Math.random()*10))}"
     fontSize={0.3}
-    color="red"
+    color="lime"
     position={getCabPosition(cab).toSpliced(1, 1, 4)}
     rotation={[0, -Math.PI/2, 0]}
   />
