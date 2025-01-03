@@ -90,23 +90,24 @@
 {/each}
 
 <!-- WALLS -->
-<T.Mesh
-  position.z={-floorLayout.tilesY/2-0.001}
-  position.y={5}
-  position.x={0}
->
-  <T.PlaneGeometry args={[floorLayout.tilesX, 10]}/>
-  <T.MeshBasicMaterial />
-</T.Mesh>
-<T.Mesh
-  position.z={0.001}
-  position.y={5}
-  position.x={floorLayout.tilesX/2+0.001}
-  rotation={[0, -Math.PI/2, 0]}
->
-  <T.PlaneGeometry args={[floorLayout.tilesY, 10]}/>
-  <T.MeshBasicMaterial />
-</T.Mesh>
+<!-- <T.Mesh
+     position.z={-floorLayout.tilesY/2-0.001}
+     position.y={5}
+     position.x={0}
+     >
+     <T.PlaneGeometry args={[floorLayout.tilesX, 10]}/>
+     <T.MeshBasicMaterial />
+     </T.Mesh>
+     <T.Mesh
+     position.z={0.001}
+     position.y={5}
+     position.x={floorLayout.tilesX/2+0.001}
+     rotation={[0, -Math.PI/2, 0]}
+     >
+     <T.PlaneGeometry args={[floorLayout.tilesY, 10]}/>
+     <T.MeshBasicMaterial />
+     </T.Mesh>
+-->
 
 <!-- CABINETS -->
 {#each cabs as cab}
